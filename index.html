@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="hu"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CCTF — Claude Code Task Force</title>
+<style>
+:root{--bg:#122B54;--deep:#0A1428;--raised:#1B3768;--grid:#24477C;--acc:#13A0D3;--hi:#5FE0FF;--t:#fff;--med:#B5DAE6;--lo:#6B89B5}
+*{box-sizing:border-box;margin:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:var(--bg);color:var(--t);line-height:1.5;
+background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:48px 48px;background-attachment:fixed}
+body::after{content:"";position:fixed;inset:0;
+  background:url(logo.png) center/85% auto no-repeat,
+             url(bg-logo.png) center/45% auto no-repeat;
+  opacity:.07;z-index:-2;pointer-events:none}
+body::before{content:"";position:fixed;inset:0;background:rgba(18,43,84,.93);z-index:-1}
+main{max-width:720px;margin:0 auto;padding:24px 18px 48px}
+.mono{font-family:Consolas,"SF Mono",monospace;color:var(--hi);font-size:.8rem;letter-spacing:.08em}
+header{text-align:center;padding:24px 0 8px}
+header img{width:120px;height:auto;border-radius:18px}
+.cctf-wordmark{margin:14px 0 0}
+.cctf-wordmark img{width:220px;height:auto;display:block;margin:0 auto}
+.lead{color:var(--med);font-size:1rem;margin-top:8px;font-style:italic}
+.lang-btn{position:fixed;top:14px;right:14px;z-index:100;display:flex;gap:0;border-radius:5px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.4)}
+.lang-btn button{background:var(--raised);color:var(--lo);border:none;padding:6px 11px;font-size:.75rem;font-weight:700;cursor:pointer;letter-spacing:.05em;transition:background .15s,color .15s}
+.lang-btn button.active{background:var(--acc);color:#fff}
+.lang-btn button:hover:not(.active){background:var(--grid);color:var(--t)}
+section{margin-top:30px}
+h2{font-size:1.15rem;margin:6px 0 12px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:22px}
+.card{background:var(--raised);border-top:3px solid var(--acc);border-radius:6px;padding:14px}
+.card h3{font-size:1rem;margin-bottom:4px}
+.card p{color:var(--med);font-size:.92rem}
+.stat b{display:block;font-size:2rem;color:var(--hi);line-height:1.1}
+.stat span{color:var(--med);font-size:.85rem}
+.grid{display:grid;gap:10px}
+.badge{display:inline-block;font-family:Consolas,monospace;font-size:.72rem;padding:2px 8px;border:1px solid var(--hi);color:var(--hi);border-radius:3px;margin-bottom:6px}
+.badge.soon{border-color:var(--lo);color:var(--lo)}
+footer{margin-top:40px;text-align:center;color:var(--lo)}
+.send-box{background:var(--raised);border:1px solid var(--acc);border-radius:8px;padding:20px 16px;display:flex;flex-direction:column;gap:10px;align-items:center}
+.send-box p{color:var(--med);font-size:.9rem;text-align:center}
+.send-btn{background:linear-gradient(135deg,var(--acc),#0d7fa8);color:#fff;border:none;border-radius:5px;padding:12px 28px;font-size:.95rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:opacity .15s;text-decoration:none;display:inline-block}
+.send-btn:hover{opacity:.85}
+@media(min-width:600px){.grid.two{grid-template-columns:1fr 1fr}.stats{grid-template-columns:repeat(4,1fr)}}
+</style>
+</head>
+<body><div class="lang-btn">
+  <button id="btnHU" class="active" onclick="setLang('hu')">HU</button>
+  <button id="btnEN" onclick="setLang('en')">EN</button>
+</div>
+
+<main>
+<header>
+  <img src="logo.png" alt="CCTF logo">
+  <div class="cctf-wordmark">
+    <img src="wordmark.png" alt="CCTF — Claude Code Task Force">
+  </div>
+  <p class="lead" data-i18n="lead">Where PL/I development meets AI.</p>
+</header>
+
+<div class="send-box" style="margin-top:24px">
+  <a class="send-btn" href="https://forms.cloud.microsoft/e/DdMzKn60TD" target="_blank" rel="noopener" data-i18n="send_btn">Küldd el a Confluence linket a céges emailcímedre</a>
+</div>
+
+<div class="stats">
+  <div class="card stat"><b>9</b><span data-i18n="stat1">Members</span></div>
+  <div class="card stat"><b>20</b><span data-i18n="stat2">Internal tools</span></div>
+  <div class="card stat"><b>3</b><span data-i18n="stat3">Workshops</span></div>
+  <div class="card stat"><b>3</b><span data-i18n="stat4">MCP integrations</span></div>
+</div>
+
+<section>
+  <div class="mono">// <span data-i18n="s_mission_tag">MISSION</span></div>
+  <h2 data-i18n="s_mission_h">Why we exist</h2>
+  <div class="card"><p data-i18n="s_mission_p">We are a group of PL/I developers exploring what happens when decades of legacy PL/I expertise meets modern AI. Our mission: make PL/I development easier and faster for everyone. We build AI-driven tooling, powered by Claude Code, to accelerate development and automate the tedious work. We don't replace the developer, we strip out the boilerplate.</p></div>
+</section>
+
+<section>
+  <div class="mono">// <span data-i18n="s_toolkit_tag">TOOLKIT</span></div>
+  <h2 data-i18n="s_toolkit_h">Our toolkit</h2>
+  <div class="grid two">
+    <div class="card"><h3>Claude Code</h3><p data-i18n="t1">One of the most capable AI models on the market.</p></div>
+    <div class="card"><h3>CLI tools &amp; MCPs</h3><p data-i18n="t2">Command-line tools and MCP connectors acting as one central workspace.</p></div>
+    <div class="card"><h3>Visual Studio Code</h3><p data-i18n="t3">A free, scalable, AI-integrated modern development environment.</p></div>
+    <div class="card"><h3 data-i18n="t4h">Tools by Claude Code</h3><p data-i18n="t4">Custom tools, built with Claude Code, for everyday pain points.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="mono">// <span data-i18n="s_what_tag">WHAT WE DO</span></div>
+  <h2 data-i18n="s_what_h">What we do</h2>
+  <div class="grid two">
+    <div class="card"><h3 data-i18n="w1h">PL/I Development Acceleration</h3><p data-i18n="w1">AI-assisted development that speeds up the whole cycle, not just the typing.</p></div>
+    <div class="card"><h3 data-i18n="w2h">Creating Tools</h3><p data-i18n="w2">Custom tools for real problems: we target a concrete pain point and build the fix.</p></div>
+    <div class="card"><h3 data-i18n="w3h">Automation</h3><p data-i18n="w3">Repetitive work, solved. We pinpoint pain points and deliver automated resolutions.</p></div>
+    <div class="card"><h3 data-i18n="w4h">Workshops</h3><p data-i18n="w4">A hands-on series designed to put AI into everyone's hands.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="mono">// <span data-i18n="s_ws_tag">WORKSHOPS</span></div>
+  <h2 data-i18n="s_ws_h">Monthly workshops</h2>
+  <div class="grid">
+    <div class="card"><span class="badge">DONE</span><h3>1 · Claude Code install &amp; setup</h3><p data-i18n="ws1">First CLI launch, project-level CLAUDE.md, settings basics.</p></div>
+    <div class="card"><span class="badge">DONE</span><h3>2 · CLI tools</h3><p data-i18n="ws2">How to call our command-line tools from Claude and when to use which.</p></div>
+    <div class="card"><span class="badge">DONE</span><h3>3 · Claude Code 101 &amp; prompt engineering</h3><p data-i18n="ws3">October 2026.</p></div>
+    <div class="card"><span class="badge soon">COMING SOON</span><h3>4 · AI4PLI</h3><p data-i18n="ws4">November 2026.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="mono">// <span data-i18n="s_growth_tag">GROWTH</span></div>
+  <h2 data-i18n="s_growth_h">How we grow</h2>
+  <div class="grid">
+    <div class="card"><h3 data-i18n="g1h">Training</h3><p data-i18n="g1">4-day course on agentic AI application development: LLM fundamentals, RAG, ReAct and multi-agent systems, tracing and evaluation.</p></div>
+    <div class="card"><h3 data-i18n="g2h">AI Summit 2026</h3><p data-i18n="g2">New ideas, tools and contacts brought back to the community.</p></div>
+    <div class="card"><h3 data-i18n="g3h">Hackathon 2026 · 3rd place</h3><p data-i18n="g3">We entered as a team and finished third.</p></div>
+  </div>
+</section>
+
+<div class="send-box" style="margin-top:40px">
+  <a class="send-btn" href="https://forms.cloud.microsoft/e/DdMzKn60TD" target="_blank" rel="noopener" data-i18n="send_btn">Küldd el a Confluence linket a céges emailcímedre</a>
+</div>
+
+<footer class="mono" style="margin-top:24px">// CCTF · Claude Code Task Force</footer>
+</main>
+<script>
+  // ── Fordítások ───────────────────────────────────────────────────
+  const I18N = {
+    hu: {
+      lead:         "Ahol a PL/I fejlesztés találkozik az AI-jal.",
+      stat1: "Tag", stat2: "Belső eszköz", stat3: "Workshop", stat4: "MCP integráció",
+      s_mission_tag:"KÜLDETÉS", s_mission_h:"Miért vagyunk itt",
+      s_mission_p:  "PL/I fejlesztők csoportja vagyunk, akik azt vizsgálják, mi történik, ha a PL/I évtizedes szakértelme találkozik a modern AI-jal. Küldetésünk: a PL/I fejlesztést egyszerűbbé és gyorsabbá tenni mindenki számára. Claude Code-dal hajtott AI eszközöket építünk, hogy felgyorsítsuk a fejlesztést és automatizáljuk az ismétlődő munkát. Nem helyettesítjük a fejlesztőt — a sablon munkát vesszük le a válláról.",
+      s_toolkit_tag:"ESZKÖZÖK", s_toolkit_h:"Eszközkészletünk",
+      t1:"Az egyik legképesebb AI modell a piacon.", t2:"Parancssori eszközök és MCP konnektorok — egy közös munkaterületen.", t3:"Ingyenes, skálázható, AI-integrált modern fejlesztői környezet.", t4h:"Claude Code-dal épített eszközök", t4:"Egyedi eszközök, valós problémákra — Claude Code-dal.",
+      s_what_tag:"MIT CSINÁLUNK", s_what_h:"Amit csinálunk",
+      w1h:"PL/I fejlesztés gyorsítása", w1:"AI-asszisztált fejlesztés, amely az egész ciklust felgyorsítja, nem csak a gépelést.", w2h:"Eszközfejlesztés", w2:"Egyedi eszközök valós problémákra: megcélzunk egy konkrét fájdalompontot, és megépítjük a megoldást.", w3h:"Automatizálás", w3:"Ismétlődő munka, megoldva. Azonosítjuk a fájdalompontokat és automatizált megoldást nyújtunk.", w4h:"Workshopok", w4:"Gyakorlatorientált sorozat, amely mindenki kezébe adja az AI-t.",
+      s_ws_tag:"WORKSHOPOK", s_ws_h:"Havi workshopok",
+      ws1:"Első CLI indítás, projekt szintű CLAUDE.md, beállítások alapjai.", ws2:"Hogyan hívjuk a parancssori eszközeinket Claude-ból és mikor melyiket.", ws3:"2026. október.", ws4:"2026. november.",
+      s_growth_tag:"FEJLŐDÉS", s_growth_h:"Hogyan fejlődünk",
+      g1h:"Képzés", g1:"4 napos kurzus agentic AI alkalmazásfejlesztésről: LLM alapok, RAG, ReAct és multi-agent rendszerek, nyomkövetés és értékelés.", g2h:"AI Summit 2026", g2:"Új ötletek, eszközök és kapcsolatok, visszahozva a közösségnek.", g3h:"Hackathon 2026 · 3. hely", g3:"Csapatként indultunk és harmadik helyezést értünk el.",
+      send_btn:     "Küldd el a Confluence linket a céges emailcímedre"
+    },
+    en: {
+      lead:         "Where PL/I development meets AI.",
+      stat1:"Members", stat2:"Internal tools", stat3:"Workshops", stat4:"MCP integrations",
+      s_mission_tag:"MISSION", s_mission_h:"Why we exist",
+      s_mission_p:  "We are a group of PL/I developers exploring what happens when decades of legacy PL/I expertise meets modern AI. Our mission: make PL/I development easier and faster for everyone. We build AI-driven tooling, powered by Claude Code, to accelerate development and automate the tedious work. We don't replace the developer, we strip out the boilerplate.",
+      s_toolkit_tag:"TOOLKIT", s_toolkit_h:"Our toolkit",
+      t1:"One of the most capable AI models on the market.", t2:"Command-line tools and MCP connectors acting as one central workspace.", t3:"A free, scalable, AI-integrated modern development environment.", t4h:"Tools by Claude Code", t4:"Custom tools, built with Claude Code, for everyday pain points.",
+      s_what_tag:"WHAT WE DO", s_what_h:"What we do",
+      w1h:"PL/I Development Acceleration", w1:"AI-assisted development that speeds up the whole cycle, not just the typing.", w2h:"Creating Tools", w2:"Custom tools for real problems: we target a concrete pain point and build the fix.", w3h:"Automation", w3:"Repetitive work, solved. We pinpoint pain points and deliver automated resolutions.", w4h:"Workshops", w4:"A hands-on series designed to put AI into everyone's hands.",
+      s_ws_tag:"WORKSHOPS", s_ws_h:"Monthly workshops",
+      ws1:"First CLI launch, project-level CLAUDE.md, settings basics.", ws2:"How to call our command-line tools from Claude and when to use which.", ws3:"October 2026.", ws4:"November 2026.",
+      s_growth_tag:"GROWTH", s_growth_h:"How we grow",
+      g1h:"Training", g1:"4-day course on agentic AI application development: LLM fundamentals, RAG, ReAct and multi-agent systems, tracing and evaluation.", g2h:"AI Summit 2026", g2:"New ideas, tools and contacts brought back to the community.", g3h:"Hackathon 2026 · 3rd place", g3:"We entered as a team and finished third.",
+      send_btn:     "Send the Confluence link to my laptop"
+    }
+  };
+  let currentLang = 'hu';
+
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.getElementById('btnHU').classList.toggle('active', lang === 'hu');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    const t = I18N[lang];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (t[key] !== undefined) el.textContent = t[key];
+    });
+  }
+</script>
+</body></html>
